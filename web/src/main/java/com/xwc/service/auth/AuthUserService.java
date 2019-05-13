@@ -34,7 +34,7 @@ public class AuthUserService implements UserDetailsService {
         if (user == null) throw new BusinessException("用户名不存在", username);
         List<SimpleGrantedAuthority> simpleGrantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority("10001"));
         IUser iUser = new IUser(user.getAccount(), user.getPassword(), simpleGrantedAuthorities);
-        iUser.setOrg(orgMapper.byId(user.getOrgCode()));
+        iUser.setOrg(orgMapper.selectKey(user.getOrgCode()));
         iUser.setId(user.getId());
         return iUser;
     }

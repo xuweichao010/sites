@@ -22,7 +22,7 @@ public class AuthClientService implements ClientDetailsService {
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        Client client = clientMapper.byId(clientId);
+        Client client = clientMapper.selectKey(clientId);
         if (client == null) throw new BusinessException("客户端认证出错", clientId);
         IClient iClient = new IClient(client.getClientId(), null, client.getScope(), client.getGrantType(), null);
         return iClient;
