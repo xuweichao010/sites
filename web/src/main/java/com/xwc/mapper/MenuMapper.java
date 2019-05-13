@@ -21,4 +21,7 @@ public interface MenuMapper extends BaseMapper<Menu, String> {
 
     @GenerateSelectSql(colums = "id")
     List<String> listByIds(@Param("idList") @In(colum = "id") Collection<Long> idList);
+
+    @GenerateSelectSql(colums = "id")
+    List<String> findAll();
 }

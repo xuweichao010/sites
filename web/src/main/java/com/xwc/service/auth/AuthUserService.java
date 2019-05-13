@@ -1,7 +1,10 @@
 package com.xwc.service.auth;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.xwc.commons.expception.BusinessException;
+import com.xwc.entity.base.Menu;
 import com.xwc.entity.base.User;
+import com.xwc.mapper.MenuMapper;
 import com.xwc.mapper.OrgMapper;
 import com.xwc.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 创建人：徐卫超
@@ -27,13 +31,21 @@ public class AuthUserService implements UserDetailsService {
     private UserMapper userMapper;
     @Autowired
     private OrgMapper orgMapper;
+    @Autowired
+    private MenuMapper menuMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userMapper.byAccount(username);
         if (user == null) throw new BusinessException("用户名不存在", username);
-        List<SimpleGrantedAuthority> simpleGrantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority("10001"));
-        IUser iUser = new IUser(user.getAccount(), user.getPassword(), simpleGrantedAuthorities);
+        List<SimpleGrantedAuthority> authorities;
+        if (user.getId() == 1) {
+            authorities = menuMapper.findAll().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        } else {
+            List<Menu> menus = userMapper.listMenuByUser(user.getId());
+            authorities = menus.stream().map(menu -> new SimpleGrantedAuthority(menu.getId().toString())).collect(Collectors.toList());
+        }
+        IUser iUser = new IUser(user.getAccount(), user.getPassword(), authorities);
         iUser.setOrg(orgMapper.selectKey(user.getOrgCode()));
         iUser.setId(user.getId());
         return iUser;
