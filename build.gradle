@@ -1,0 +1,52 @@
+buildscript {
+    ext {
+        set('springCloudVersion', 'Greenwich.SR1')
+        set('springBootVersion','2.0.1.RELEASE')
+    }
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath('org.flywaydb:flyway-gradle-plugin:4.+')
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+allprojects {
+    apply plugin: 'java'
+    group 'com.xwc.web'
+    version '2.0'
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
+
+    ext {
+        set('springCloudVersion', 'Greenwich.SR1')
+    }
+    //定义编译时候使用的字符集
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+    //创建目录
+    def createDir = {
+        path ->
+            File dir = new File(path)
+            if (!dir.exists()) {
+                dir.mkdirs()
+            }
+    }
+    task mkdirJava() {
+        def paths = ['src/main/java', 'src/main/resources', 'src/test/java', 'src/test/resource'];
+        doFirst {
+            paths.forEach(createDir)
+        }
+    }
+}
+subprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
+
+}
