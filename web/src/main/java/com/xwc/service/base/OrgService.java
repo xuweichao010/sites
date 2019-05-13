@@ -31,7 +31,7 @@ public class OrgService {
     @Transactional
     public void add(OrgDto orgDto) {
         Org org = Org.convert(orgDto);
-        Org parent = orgMapper.byId(org.getParentCode());
+        Org parent = orgMapper.selectKey(org.getParentCode());
         if (parent == null) throw new BusinessException("上级机构不存在", org.getParentCode());
         String code = authInfoService.org().getCode();
         if (!org.getParentCode().startsWith(code)) throw new BusinessException("权限受限", code);
@@ -42,7 +42,7 @@ public class OrgService {
 
     public void update(Org org) {
         get(org.getCode());
-        Org parent = orgMapper.byId(org.getParentCode());
+        Org parent = orgMapper.selectKey(org.getParentCode());
         if (parent == null) throw new BusinessException("上级机构不存在", org.getParentCode());
         String code = authInfoService.org().getCode();
         if (!org.getParentCode().startsWith(code)) throw new BusinessException("权限受限", code);
@@ -52,7 +52,7 @@ public class OrgService {
     }
 
     public Org get(String code) {
-        Org org = orgMapper.byId(code);
+        Org org = orgMapper.selectKey(code);
         if (org == null) throw new BusinessException("机构不存在", code);
         return org;
     }

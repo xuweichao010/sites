@@ -47,14 +47,14 @@ public class RoleService {
             throw new BusinessException("权限受限", org.getCode(), role.getOrgCode());
         Role nameRole = roleMapper.byNameAndOrgCode(role.getName(), role.getOrgCode());
         if (nameRole != null) throw new BusinessException("角色已存在", role.getName(), role.getOrgCode());
-        org = orgMapper.byId(role.getOrgCode());
+        org = orgMapper.selectKey(role.getOrgCode());
         role.setOrgName(org.getName());
         roleMapper.insert(role);
     }
 
     @Transactional
     public void update(Role role) {
-        Role idRole = roleMapper.byId(role.getId());
+        Role idRole = roleMapper.selectKey(role.getId());
         if (idRole == null) throw new BusinessException("角色不存在", role.getId().toString());
         Role nameRole = roleMapper.byNameAndOrgCode(role.getName(), role.getOrgCode());
         if (nameRole != null && !nameRole.getId().equals(role.getId()))
@@ -62,14 +62,14 @@ public class RoleService {
         Org org = authInfoService.org();
         if (!role.getOrgCode().startsWith(org.getCode()))
             throw new BusinessException("权限受限", org.getCode(), role.getOrgCode());
-        org = orgMapper.byId(role.getOrgCode());
+        org = orgMapper.selectKey(role.getOrgCode());
         role.setOrgName(org.getName());
         roleMapper.insert(role);
         roleMenuMapper.delete(role.getId());
     }
 
     public void grandMenu(HashSet<Long> menuIdSet, Long roleId) {
-        Role role = roleMapper.byId(roleId);
+        Role role = roleMapper.selectKey(roleId);
         if (role == null) throw new BusinessException("角色不存在", roleId.toString());
         List<String> existMenuIds = menuMapper.listByIds(menuIdSet);
         if (existMenuIds.size() != menuIdSet.size()) {

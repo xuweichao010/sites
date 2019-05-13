@@ -40,7 +40,7 @@ public class UserService {
     public void add(User user) {
         User temp = userMapper.byAccount(user.getAccount());
         if (null != temp) throw new BusinessException("用户已存在", user.getAccount());
-        Org org = orgMapper.byId(user.getOrgCode());
+        Org org = orgMapper.selectKey(user.getOrgCode());
         if (org == null) throw new BusinessException("机构不存在", "机构代码" + user.getOrgCode());
         user.setOrgCode(org.getCode());
         user.setOrgName(org.getName());
@@ -48,18 +48,18 @@ public class UserService {
     }
 
     public User getUser(Long userId) {
-        User user = userMapper.byId(userId);
+        User user = userMapper.selectKey(userId);
         if (user == null) throw new BusinessException("用户不存在", String.valueOf(userId));
         return user;
     }
 
     @Transactional
     public void update(User user) {
-        User temp = userMapper.byId(user.getId());
+        User temp = userMapper.selectKey(user.getId());
         if (null == temp) throw new BusinessException("用户不存在", user.getAccount());
         temp = userMapper.byAccount(user.getAccount());
         if (null != temp && !temp.getId().equals(user.getId())) throw new BusinessException("账号已存在", user.getAccount());
-        Org org = orgMapper.byId(user.getOrgCode());
+        Org org = orgMapper.selectKey(user.getOrgCode());
         if (org == null) throw new BusinessException("机构不存在", "机构代码" + org.getCode());
         user.setOrgCode(org.getCode());
         user.setOrgName(org.getName());
@@ -84,7 +84,7 @@ public class UserService {
 
     @Transactional
     public void grantRole(Long userId, Set<Long> roleIdSet) {
-        User user = userMapper.byId(userId);
+        User user = userMapper.selectKey(userId);
         if (null == user) throw new BusinessException("用户不存在", String.valueOf(userId));
         Org org = authInfoService.org();
         List<Long> existRoleId = roleMapper.listByRoleId(roleIdSet, org.getCode());
