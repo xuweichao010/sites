@@ -1,6 +1,5 @@
 package com.xwc.service.auth;
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.xwc.commons.expception.BusinessException;
 import com.xwc.entity.base.Menu;
 import com.xwc.entity.base.User;
@@ -14,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

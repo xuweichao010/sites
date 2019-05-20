@@ -13,7 +13,7 @@ import java.util.TimeZone;
  * 描述：对SimpleDateFormat 和 Calendar对象的增强
  */
 @SuppressWarnings("all")
-public class DateFormatUtils {
+public class  DateFormatUtils {
 
     public static final String GMT8_TIME = "HH:mm:ss";
     public static final String GMT8_DATE = "yyyy-MM-dd";

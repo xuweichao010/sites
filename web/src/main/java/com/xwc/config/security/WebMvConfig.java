@@ -1,6 +1,5 @@
 package com.xwc.config.security;
 
-import com.xwc.commons.expception.BusinessException;
 import com.xwc.commons.utils.StringUtils;
 import com.xwc.config.security.anno.Privilege;
 import com.xwc.service.CacheService;
@@ -8,16 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * 功能：用于自定义拦截
  */
 @Configuration
-public class WebMvConfig extends WebMvcConfigurerAdapter {
+public class WebMvConfig implements WebMvcConfigurer {
 
     @Autowired
     private CacheService cacheService;

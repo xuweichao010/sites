@@ -2,6 +2,7 @@ package com.xwc.controller.auth;
 
 import com.xwc.commons.expception.SystemException;
 import com.xwc.commons.model.JsonMessage;
+import com.xwc.commons.utils.CodingUtils;
 import com.xwc.commons.utils.StringUtils;
 import com.xwc.controller.auth.dto.ClientLoginDto;
 import com.xwc.controller.auth.dto.UserLoginDto;
@@ -26,10 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 创建人：徐卫超
@@ -45,16 +43,16 @@ public class AuthController {
     @Autowired
     private TokenEndpoint tokenEndpoint;
     @Autowired
-    HttpSession httpSession;
+    private HttpSession httpSession;
     @Autowired
     private CacheService cacheService;
 
     @GetMapping("/secret/{account}")
     @ApiOperation("获取秘钥(秘钥有效时间为5分钟且只能使用一次)")
     public JsonMessage<String> secret(@PathVariable("account") String account) throws HttpRequestMethodNotSupportedException {
-        int secret = new Double(Math.random() * 10000).intValue();
+        String secret = UUID.randomUUID().toString().replaceAll("-", "");
         cacheService.setValue(CacheService.AUT_HOME_SERCRT + account, String.valueOf(secret), 5 * 60L);
-        return JsonMessage.succeed(String.valueOf(secret));
+        return JsonMessage.succeed(secret);
     }
 
     @PostMapping("/user/login")
