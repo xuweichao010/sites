@@ -9,5 +9,4 @@ package com.xwc.config.web;
 public enum EventType {
     connect,
     notified
-
 }
