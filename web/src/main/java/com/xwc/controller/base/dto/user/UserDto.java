@@ -1,10 +1,8 @@
 package com.xwc.controller.base.dto.user;
 
-import com.xwc.entity.base.User;
-import io.swagger.annotations.ApiModelProperty;
-import org.springframework.beans.BeanUtils;
-
 import javax.validation.constraints.NotNull;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 创建人：徐卫超
@@ -38,12 +36,6 @@ public class UserDto {
     @NotNull(message = "机构不能为空")
     private String orgCode;
 
-
-    public static UserDto convert(User user) {
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(user, userDto);
-        return userDto;
-    }
 
     /**
      * 用户ID

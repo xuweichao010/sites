@@ -1,8 +1,7 @@
 package com.xwc.controller.base.dto.user;
 
 import com.xwc.commons.model.PageRequest;
-import com.xwc.esbatis.anno.condition.enhance.Like;
-import com.xwc.esbatis.anno.condition.enhance.RightLike;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -15,20 +14,16 @@ public class UserFilterDto extends PageRequest {
 
 
     @ApiModelProperty("账号")
-    @Like
     private String account;
 
 
     @ApiModelProperty("用户名")
-    @Like
     private String name;
 
     @ApiModelProperty("机构名")
-    @Like
     private String orgName;
 
     @ApiModelProperty("机构代码")
-    @RightLike
     private String orgCode;
 
     public String getAccount() {

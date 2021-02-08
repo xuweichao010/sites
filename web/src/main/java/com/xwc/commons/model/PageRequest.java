@@ -1,7 +1,6 @@
 package com.xwc.commons.model;
 
-import com.xwc.esbatis.anno.condition.enhance.LimitOffset;
-import com.xwc.esbatis.anno.condition.enhance.LimitStart;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -13,10 +12,8 @@ import io.swagger.annotations.ApiModelProperty;
 public class PageRequest {
 
     @ApiModelProperty("每页记录条数 默认：10")
-    @LimitOffset
     private Long offset = 10L;
     @ApiModelProperty("查询第多少页 默认: 1页")
-    @LimitStart
     private Long start = 1L;
 
     public Long getOffset() {

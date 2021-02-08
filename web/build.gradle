@@ -10,17 +10,7 @@ dependencyManagement {
 dependencies {
     implementation("org.flywaydb:flyway-core:4.2.0")
     testImplementation('org.springframework.boot:spring-boot-starter-test') //springboot快速启动组件
-    implementation("org.springframework.boot:spring-boot-starter-security") //安全框架
-    implementation('org.springframework.security.oauth:spring-security-oauth2:2.3.2.RELEASE')
     implementation("org.springframework.boot:spring-boot-starter-web")     //web
     implementation("io.springfox:springfox-swagger2:2.7.0")  //快速构建API
     implementation("io.springfox:springfox-swagger-ui:2.7.0") //快速构建API
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.session:spring-session-data-redis")
-    implementation('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.2.2')  //SpringBoot 整合MyBatis
-    implementation("com.alibaba:druid:1.1.2")  //数据库连接池
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
-    runtimeOnly('mysql:mysql-connector-java:5.+') //数据库驱动
-    implementation('com.alibaba:fastjson:1.2.47')
-    compile project(":esbatis")
 }
