@@ -15,7 +15,6 @@ import java.util.List;
  * 作者：CC 时间：2020/8/20 15:46 描述：
  */
 @Configuration
-@EnableWebMvc
 public class AppWebMvcConfigurer implements WebMvcConfigurer {
 
     @Autowired

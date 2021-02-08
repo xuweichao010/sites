@@ -29,8 +29,8 @@ public class UserController {
     }
 
     @PostMapping("/1")
-    @ApiOperation("添加用户")
-    public JsonMessage<Void> addUser1(@Validated UserDto body) {
+    @ApiOperation("添加用户1")
+    public JsonMessage<Void> addUser1(@Validated @RequestBody UserDto body) {
         return JsonMessage.succeed();
     }
 
