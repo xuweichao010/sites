@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import springfox.documentation.oas.annotations.EnableOpenApi;
+
 /**
  * 创建人：徐卫超
  * 时间: 2018/5/12
@@ -12,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableScheduling
+@EnableOpenApi
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

@@ -3,14 +3,12 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-        mavenBom "org.springframework.boot:spring-boot-starter-parent:2.0.1.RELEASE"
+        mavenBom "org.springframework.boot:spring-boot-starter-parent:2.2.13.RELEASE"
     }
 }
 dependencies {
     implementation("org.flywaydb:flyway-core:4.2.0")
     testImplementation('org.springframework.boot:spring-boot-starter-test') //springboot快速启动组件
     implementation("org.springframework.boot:spring-boot-starter-web")     //web
-    implementation("io.springfox:springfox-swagger2:2.7.0")  //快速构建API
-    implementation("io.springfox:springfox-swagger-ui:2.7.0") //快速构建API
+    implementation("io.springfox:springfox-boot-starter:3.0.0")  //快速构建API
 }

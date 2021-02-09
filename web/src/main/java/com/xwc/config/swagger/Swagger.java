@@ -1,0 +1,50 @@
+//package com.xwc.config.swagger;
+//
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//
+//import springfox.documentation.builders.ApiInfoBuilder;
+//import springfox.documentation.builders.ParameterBuilder;
+//import springfox.documentation.builders.PathSelectors;
+//import springfox.documentation.builders.RequestHandlerSelectors;
+//import springfox.documentation.schema.ModelRef;
+//import springfox.documentation.service.*;
+//import springfox.documentation.spi.DocumentationType;
+//import springfox.documentation.spi.service.contexts.SecurityContext;
+//import springfox.documentation.spring.web.plugins.Docket;
+//import springfox.documentation.swagger2.annotations.EnableSwagger2;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+///**
+// * 创建人：徐卫超 创建时间：2019/3/13  16:03 业务： 功能：
+// */
+//@Configuration
+//@EnableSwagger2
+//public class Swagger {
+//    @Bean
+//    public Docket createRestApi() {
+//        ParameterBuilder tokenPar = new ParameterBuilder();
+//        List<Parameter> pars = new ArrayList<>();
+//        tokenPar.name("x-access-token").description("令牌").modelRef(new ModelRef("string")).parameterType("query")
+//                .defaultValue("").required(false).build();
+//        pars.add(tokenPar.build());
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .apiInfo(apiInfo()).forCodeGeneration(true)
+//                .select()
+//                .apis(RequestHandlerSelectors.basePackage("com.xwc.controller"))
+//                .paths(PathSelectors.any())
+//                .build();
+//    }
+//
+//    private ApiInfo apiInfo() {
+//        return new ApiInfoBuilder()
+//                .title("APi文档")
+//                .description("接入文档请参考：http://localhost:7001/auth/index.html")
+//                .version("1.0")
+//                .build();
+//    }
+//
+//
+//}

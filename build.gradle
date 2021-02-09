@@ -1,7 +1,7 @@
 buildscript {
     ext {
         set('springCloudVersion', 'Greenwich.SR1')
-        set('springBootVersion','2.0.1.RELEASE')
+        set('springBootVersion','2.2.13.RELEASE')
     }
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
