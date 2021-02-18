@@ -1,7 +1,5 @@
 package com.xwc.config.mvc;
 
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,7 +10,7 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.PARAMETER, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EncryptBody {
+public @interface Encrypt {
 
     /**
      * Whether body content is required.

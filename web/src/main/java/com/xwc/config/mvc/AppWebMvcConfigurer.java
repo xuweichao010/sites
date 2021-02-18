@@ -17,25 +17,4 @@ import java.util.List;
 @Configuration
 public class AppWebMvcConfigurer implements WebMvcConfigurer {
 
-    @Autowired
-    private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
-    @Autowired
-    private DefaultRequestResponseBodyMethodProcessor defaultRequestResponseBodyMethodProcessor;
-
-    /**
-     * Controller 方法参数注入
-     *
-     * @param argumentResolvers
-     */
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(defaultRequestResponseBodyMethodProcessor);
-    }
-
-
-    @Bean
-    public DefaultRequestResponseBodyMethodProcessor defaultRequestResponseBodyMethodProcessor(
-            List<HttpMessageConverter<?>> httpMessageConverterList) {
-        return new DefaultRequestResponseBodyMethodProcessor();
-    }
 }

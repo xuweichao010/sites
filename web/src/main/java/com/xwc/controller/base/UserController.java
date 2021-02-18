@@ -1,7 +1,7 @@
 package com.xwc.controller.base;
 
 import com.xwc.commons.model.JsonMessage;
-import com.xwc.config.mvc.EncryptBody;
+import com.xwc.config.mvc.Encrypt;
 import com.xwc.controller.base.dto.user.UserDto;
 
 import org.springframework.validation.annotation.Validated;
@@ -24,14 +24,15 @@ public class UserController {
 
     @PostMapping()
     @ApiOperation("添加用户")
-    public JsonMessage<Void> addUser(@Validated @EncryptBody UserDto body) {
-        return JsonMessage.succeed();
+    @Encrypt
+    public JsonMessage<UserDto> addUser(@Encrypt @RequestBody UserDto body) {
+        return JsonMessage.succeed(body);
     }
 
     @PostMapping("/1")
     @ApiOperation("添加用户1")
-    public JsonMessage<Void> addUser1(@Validated @RequestBody UserDto body) {
-        return JsonMessage.succeed();
+    public JsonMessage<UserDto> addUser1(@RequestBody UserDto body) {
+        return JsonMessage.succeed(body);
     }
 
 }
